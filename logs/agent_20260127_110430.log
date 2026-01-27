@@ -1,0 +1,249 @@
+2026-01-27 11:04:30,158 - src.utils - INFO - Logging initialized: C:\Users\work4\OneDrive\¹ÙÅÁ È­¸é\»ê¾÷AI_Agnet_ÇØÄ¿Åæ\logs\agent_20260127_110430.log
+2026-01-27 11:04:30,164 - src.integrated_agent - INFO -    API Key: U2FsdGVkX188gER8U5zV...
+2026-01-27 11:04:30,164 - src.integrated_agent - INFO -    Model: gpt-4o-mini-2024-07-18
+2026-01-27 11:04:30,164 - src.integrated_agent - INFO -    Input: C:\Users\work4\OneDrive\¹ÙÅÁ È­¸é\»ê¾÷AI_Agnet_ÇØÄ¿Åæ\data.csv
+2026-01-27 11:04:30,166 - src.integrated_agent - INFO -    Output: C:\Users\work4\OneDrive\¹ÙÅÁ È­¸é\»ê¾÷AI_Agnet_ÇØÄ¿Åæ\outputs\output.csv
+2026-01-27 11:04:30,180 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:30,182 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:30,182 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:04:31,977 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:04:31,978 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:04:31,978 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:04:31,978 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:04:34,185 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:04:34,185 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:04:34,185 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:04:34,188 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:04:34,399 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:34,402 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:34,402 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:04:36,328 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:04:36,328 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:04:36,330 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:04:36,330 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:04:37,975 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:04:37,975 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:04:37,975 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:04:37,979 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:04:38,183 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:38,185 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:38,185 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:04:39,853 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:04:39,853 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:04:39,853 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:04:39,853 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:04:41,769 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:04:41,769 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:04:41,769 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:04:41,770 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:04:41,979 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:41,981 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:41,982 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:04:43,618 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:04:43,618 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:04:43,618 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:04:43,618 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:04:45,242 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:04:45,243 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:04:45,243 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:04:45,245 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:04:45,449 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:45,451 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:45,451 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:04:46,999 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:04:46,999 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:04:46,999 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:04:47,000 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:04:49,258 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:04:49,259 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:04:49,259 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:04:49,262 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:04:49,469 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:49,471 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:49,472 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:04:51,352 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:04:51,352 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:04:51,352 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:04:51,352 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:04:53,282 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:04:53,282 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:04:53,282 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:04:53,287 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:04:53,488 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:53,491 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:53,492 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:04:55,693 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:04:55,693 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:04:55,693 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:04:55,693 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:04:57,591 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:04:57,591 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:04:57,591 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:04:57,595 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:04:57,796 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:57,798 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:04:57,799 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:04:59,618 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:04:59,624 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:04:59,624 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:04:59,624 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:05:01,498 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:01,498 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:01,498 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:05:01,502 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:05:01,703 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:01,704 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:01,704 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:05:03,579 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:03,582 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:03,582 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:05:03,583 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:05:05,793 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:05,793 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:05,793 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:05:05,797 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:05:06,006 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:06,011 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:06,012 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:05:08,388 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:08,388 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:08,389 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:05:08,389 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:05:10,129 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:10,131 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:10,131 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:05:10,138 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:05:10,344 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:10,344 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:10,344 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:05:12,094 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:12,094 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:12,097 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:05:12,098 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:05:14,630 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:14,630 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:14,630 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:05:14,630 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:05:14,841 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:14,844 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:14,846 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:05:17,298 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:17,298 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:17,298 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:05:17,298 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:05:19,041 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:19,042 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:19,042 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:05:19,047 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:05:19,254 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:19,258 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:19,258 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:05:21,497 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:21,498 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:21,498 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:05:21,498 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:05:23,097 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:23,097 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:23,097 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:05:23,099 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:05:23,304 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:23,307 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:23,307 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:05:24,900 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:24,900 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:24,907 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:05:24,907 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:05:27,256 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:27,256 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:27,257 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:05:27,260 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:05:27,466 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:27,467 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:27,467 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:05:29,851 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:29,852 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:29,852 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:05:29,852 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:05:32,043 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:32,044 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:32,044 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:05:32,050 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:05:32,256 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:32,259 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:32,260 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:05:34,402 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:34,402 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:34,402 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:05:34,402 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:05:36,683 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:36,683 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:36,684 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:05:36,685 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:05:36,886 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:36,888 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:36,888 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:05:38,904 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:38,904 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:38,904 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:05:38,908 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:05:40,660 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:40,660 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:40,660 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:05:40,662 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:05:40,876 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:40,879 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:40,879 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:05:43,059 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:43,059 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:43,059 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:05:43,059 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:05:45,039 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:45,040 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:45,040 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:05:45,041 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:05:45,248 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:45,250 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:45,250 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:05:47,120 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:47,120 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:47,122 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:05:47,123 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:05:49,548 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:49,549 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:49,549 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:05:49,549 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:05:49,753 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:49,755 - src.integrated_agent - INFO - ============================================================
+2026-01-27 11:05:49,755 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=False)
+2026-01-27 11:05:51,605 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:51,606 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:51,606 - src.integrated_agent - INFO -   [REVIEW] Decision uncertain, performing strict re-analysis...
+2026-01-27 11:05:51,607 - src.integrated_agent - INFO -   [OBSERVE] Analyzing image (strict=True)
+2026-01-27 11:05:53,362 - src.integrated_agent - INFO -   [THINK] Analyzing observations
+2026-01-27 11:05:53,362 - src.integrated_agent - INFO -   [ACT] Making decision
+2026-01-27 11:05:53,362 - src.integrated_agent - INFO -   [VERIFY] Verifying decision (review=True)
+2026-01-27 11:05:53,365 - src.integrated_agent - INFO - ============================================================
+
+2026-01-27 11:05:53,608 - src.integrated_agent - INFO -    Total: 20
+2026-01-27 11:05:53,609 - src.integrated_agent - INFO -    Normal: 18
+2026-01-27 11:05:53,610 - src.integrated_agent - INFO -    Abnormal: 2
+2026-01-27 11:05:53,610 - src.integrated_agent - INFO -    Abnormal Rate: 10.0%
