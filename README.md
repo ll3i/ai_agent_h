@@ -90,12 +90,13 @@ SALTLUX_API_BASE_URL=https://bridge.luxiacloud.com/llm/openai/chat/completions/g
 
 ### 4. 실행 방법
 
-**방법 1: Python 스크립트 실행 (권장)**
+
+**방법 1: 최종 V8 모델 실행 (권장 - Leaderboard 0.76)**
 ```bash
-python run_agent.py
+python run_v8.py
 ```
 
-**방법 2: 통합 Agent 직접 실행**
+**방법 2: 통합 Agent 실행**
 ```bash
 python -m src.integrated_agent
 ```
