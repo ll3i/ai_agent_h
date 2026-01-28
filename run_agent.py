@@ -25,16 +25,16 @@ from src.integrated_agent import main
 
 if __name__ == "__main__":
     try:
-        print("🚀 Manufacturing AI Agent Starting...")
+        print("Manufacturing AI Agent Starting...")
         print("=" * 70)
         main()
         print("=" * 70)
-        print("✅ All tasks completed successfully!")
+        print("All tasks completed successfully!")
     except KeyboardInterrupt:
-        print("\n⚠️  Interrupted by user")
+        print("\nInterrupted by user")
         sys.exit(1)
     except Exception as e:
-        print(f"\n❌ Error: {e}")
+        print(f"\nError: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)

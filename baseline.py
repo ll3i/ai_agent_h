@@ -3,22 +3,28 @@ import json
 import time
 import random
 import requests
-import pandas as pd
+import pandas as pd # type: ignore
+import base64
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # =========================
 # 설정
 # =========================
 # 참가자 안내:
 # - 아래 API_KEY / BRIDGE_URL / MODEL은 솔트룩스 "LLM API 호출 설정" 문법을 따릅니다.
-# - 이 베이스라인은 GPT-4o-mini를 Agent의 메인 LLM으로 하여, 
+# - 이 베이스라인은 GPT-4o-mini를 Agent의 메인 LLM으로 하여,
 # - (1) 이미지 관찰(LLM) -> (2) 규칙 기반 판단 -> (3) 애매하면 1회 재검토의 아주 기초적인 AI Agent 구조를 보여주는 예시입니다.
-API_KEY = "YOUR API KEY" # 팀 탭에서 배정된 솔트룩스 API KEY를 기입하세요.
+API_KEY = os.getenv("SALTLUX_API_KEY", "YOUR API KEY") # .env 파일에서 API KEY 로드
 BRIDGE_URL = "https://bridge.luxiacloud.com/llm/openai/chat/completions/gpt-4o-mini/create"
 MODEL = "gpt-4o-mini-2024-07-18"
 
-# 입력(test.csv) / 출력(submission.csv) 경로
-TEST_CSV_PATH = "./dev.csv" # 1일차 예시 샘플 데이터 20장
-OUT_PATH = "./submission.csv"
+# 입력(test.csv) / 출력(output.csv) 경로
+TEST_CSV_PATH = "./test.csv" # 100장 테스트 데이터
+OUT_PATH = "./output/output.csv"
 
 # API 호출 헤더
 HEADERS = {"apikey": API_KEY, "Content-Type": "application/json"}
@@ -34,12 +40,15 @@ LABEL_ABNORMAL = 1
 # - "관찰할 결함 항목"을 정의하는 곳입니다.
 # - (항목_key, 항목_설명) 형태로 되어 있어, 여기에 줄만 추가/삭제하면
 #   프롬프트와 파싱 키(KEYS)가 자동으로 맞춰집니다.
+# 분류 판단 기준 기반 관찰 항목 (6가지 불량 유형)
+# 우선순위: lead_connectivity_fail(가장 중요) > component_missing > body_broken_severe > posture_bad > rotation_severe > surface_defect_only
 OBS_ITEMS = [
-    ("package_damage", "크랙/파손/깨짐 등 패키지 손상"),
-    ("lead_missing_or_broken", "리드 결손/단선"),
-    ("lead_severe_bend_or_contact", "심한 휨 또는 리드끼리 접촉"),
-    ("solder_bridge_or_blob", "솔더 브리지 또는 납땜 뭉침"),
-    ("misalignment_severe", "소자 위치가 과도하게 틀어짐"),
+    ("component_missing", "[Missing] Component completely missing - only PCB holes visible, no component"),
+    ("lead_connectivity_fail", "[Connectivity-CRITICAL] Lead Cut/Miss/Short - lead is cut short, not in hole, or touching each other"),
+    ("body_broken_severe", "[Broken] Body severely damaged - internal chip exposed with severe damage"),
+    ("posture_bad", "[Posture] Bad posture - component lying down or flipped"),
+    ("rotation_severe", "[Rotation] Severe misalignment - rotated 45 degrees or more"),
+    ("surface_defect_only", "[Normal] Surface defects OK if connections are good"),
 ]
 
 # OBS_ITEMS에서 key만 뽑아, 결과 JSON에서 가져올 항목 목록으로 사용합니다.
@@ -68,25 +77,114 @@ SYSTEM = (
 # - OBS_ITEMS를 바꾸면 프롬프트도 자동으로 바뀝니다.
 # - strict 모드의 rule 문구를 바꾸면 "재검토 정책"을 쉽게 튜닝할 수 있습니다.
 def build_prompt(strict: bool = False) -> str:
-    header = (
-        "아래 항목을 이미지에서 관찰해 true/false로 채워 JSON만 출력해.\n"
-        "형식은 반드시 아래와 동일해야 한다.\n"
-    )
+    header = """
+You are a highly accurate IC component quality inspector for 3-lead transistors on PCB.
+
+【CRITICAL: 6 Defect Classification System - FUNCTIONALITY OVER APPEARANCE】
+
+CORE PRINCIPLE: A component is NORMAL if all leads are properly connected to PCB holes, even with cosmetic damage.
+Only flag as ABNORMAL if there is actual functional defect.
+
+1. component_missing (Missing Type): Component completely missing
+   -> TRUE: Only PCB holes visible, no component at all (RARE - maybe 1-2 in 100)
+   -> FALSE: Component is present (even partially visible)
+
+2. lead_connectivity_fail (Connectivity Type) *** MOST CRITICAL ***
+   ONLY flag TRUE if you can CLEARLY see lead connection problems.
+
+   TRUE conditions - BE SPECIFIC (any of the following):
+   - Cut: Lead is VISIBLY cut short (obvious length difference), end part missing, clearly broken
+   - Miss: Lead CLEARLY not in its hole (floating above PCB, resting on surface, protruding outside)
+   - Short: Leads OBVIOUSLY touching each other or inserted in same row of holes
+   - Severe spread: Leads extremely spread apart, clearly missing their holes
+
+   INSPECT EACH LEAD CAREFULLY:
+   • Lead 1 (left): Does it reach AND enter its hole? Is it cut?
+   • Lead 2 (middle): Does it reach AND enter its hole? Is it cut?
+   • Lead 3 (right): Does it reach AND enter its hole? Is it cut?
+
+   FALSE condition (DEFAULT - most cases):
+   - All 3 leads appear to reach their holes
+   - Leads may be slightly bent, scratched, or discolored - still FALSE if connected
+   - Minor lifting or slight angle - still FALSE if tips enter holes
+   - Surface oxidation, rough finish - still FALSE if connected
+
+3. body_broken_severe (Broken Type): ONLY severe internal exposure
+   -> TRUE: Internal chip/circuitry CLEARLY visible, half of body blown off, internal frame exposed
+   -> FALSE: Surface cracks, dents, corner chips, paint damage (these are NORMAL if leads OK)
+   -> IMPORTANT: Small cracks, scratches, corner damage = FALSE
+
+4. posture_bad (Posture Type): Extreme orientation only
+   -> TRUE: Component COMPLETELY lying flat on side OR fully inverted (upside down)
+   -> FALSE: Standing upright (even if slightly tilted)
+
+5. rotation_severe (Rotation Type): Extreme misalignment only
+   -> TRUE: Rotated 45+ degrees (looks like diamond shape)
+   -> FALSE: Normal orientation or slight tilt (<45 degrees)
+
+6. surface_defect_only (Normal): Use this for cosmetic-only issues
+   -> TRUE: Has scratches/dents/discoloration BUT all leads properly connected
+   -> KEY RULE: "Ugly but functional" = NORMAL = surface_defect_only TRUE
+
+"""
 
     # JSON 템플릿을 자동 생성합니다.
-    # 예) { "package_damage": false, ... }
-    json_template = "{\n" + ",\n".join([f'  "{k}": false' for k, _ in OBS_ITEMS]) + "\n}"
+    json_template = "Output ONLY this JSON with NO other text:\n{\n" + ",\n".join([f'  "{k}": false' for k, _ in OBS_ITEMS]) + "\n}"
 
-    # strict 여부에 따라 판단 기준 문구만 다르게 줍니다.
+    # strict 여부에 따라 판단 기준 문구를 다르게 줍니다.
     if strict:
-        rule = "\n판단 기준:\n- 매우 보수적으로 판단한다. 애매하면 무조건 false.\n"
+        rule = """
+【STRICT MODE - Second Review】
+If you see ANY of these, flag lead_connectivity_fail = TRUE:
+- Lead CLEARLY cut short (obvious length difference)
+- Lead CLEARLY not in hole (floating, outside hole)
+- Leads TOUCHING each other
+- Component completely lying down or inverted
+Otherwise, be conservative -> FALSE
+"""
     else:
-        rule = "\n판단 기준:\n- 아주 명확할 때만 true. 애매하면 false.\n"
+        rule = """
+【STANDARD MODE - Balanced Detection】
 
-    # 각 항목에 대한 간단한 설명을 붙입니다.
-    criteria = "\n".join([f"- {k}: {desc}" for k, desc in OBS_ITEMS])
+CRITICAL DECISION TREE:
 
-    return header + json_template + rule + criteria
+Step 1: Check if component exists
+- No component visible? -> component_missing = TRUE
+- Component present? -> Continue to Step 2
+
+Step 2: Check lead connectivity (MOST IMPORTANT)
+For EACH of the 3 leads, ask:
+  LEFT lead:   Can you see it reaching AND entering its hole? Is it cut?
+  MIDDLE lead: Can you see it reaching AND entering its hole? Is it cut?
+  RIGHT lead:  Can you see it reaching AND entering its hole? Is it cut?
+
+If ANY lead is clearly CUT, MISSING, or NOT IN HOLE -> lead_connectivity_fail = TRUE
+If ALL leads appear connected -> lead_connectivity_fail = FALSE (go to Step 3)
+
+Step 3: Check severe body damage
+- Can you see INTERNAL chip/circuitry? -> body_broken_severe = TRUE
+- Only surface damage? -> body_broken_severe = FALSE (go to Step 4)
+
+Step 4: Check posture
+- Component lying FLAT or UPSIDE DOWN? -> posture_bad = TRUE
+- Standing upright? -> posture_bad = FALSE (go to Step 5)
+
+Step 5: Check rotation
+- Rotated 45+ degrees (diamond shape)? -> rotation_severe = TRUE
+- Normal angle? -> rotation_severe = FALSE (go to Step 6)
+
+Step 6: Final classification
+- Has cosmetic issues (scratches/dents) BUT leads connected? -> surface_defect_only = TRUE
+- Clean appearance and leads connected? -> All FALSE (normal)
+
+【REMEMBER】
+- Bent leads are OK if they reach holes
+- Scratched/dirty components are OK if leads connected
+- Minor cracks are OK if no internal exposure
+- When uncertain, prefer FALSE (normal) over TRUE (defect)
+"""
+    
+    return header + "\n" + json_template + "\n" + rule
 
 # 일반 관찰 프롬프트 / 보수적 관찰 프롬프트를 미리 만들어둡니다.
 PROMPT_NORMAL = build_prompt(strict=False)
@@ -129,6 +227,26 @@ def _safe_json_extract(s: str) -> dict:
     raise ValueError(f"JSON parse failed: {s[:200]}")
 
 # =========================
+# _convert_to_data_uri(img_path)
+# =========================
+# 역할:
+# - 로컬 이미지 파일을 base64로 인코딩하여 data URI로 변환합니다.
+def _convert_to_data_uri(img_path: str) -> str:
+    """Convert local image file to base64 data URI for API"""
+    if img_path.startswith('http://') or img_path.startswith('https://'):
+        return img_path
+
+    # 로컬 파일 처리
+    if not os.path.exists(img_path):
+        raise FileNotFoundError(f"Image file not found: {img_path}")
+
+    with open(img_path, 'rb') as f:
+        img_data = f.read()
+
+    base64_data = base64.b64encode(img_data).decode('utf-8')
+    return f"data:image/png;base64,{base64_data}"
+
+# =========================
 # observe(img_url, strict)
 # =========================
 # Agent Step 1: Observe (관찰 단계)
@@ -144,11 +262,14 @@ def _safe_json_extract(s: str) -> dict:
 def observe(img_url: str, strict: bool = False) -> dict:
     prompt = PROMPT_STRICT if strict else PROMPT_NORMAL
 
+    # 로컬 파일 경로를 data URI로 변환
+    img_uri = _convert_to_data_uri(img_url)
+
     content = _post_chat([
         {"role": "system", "content": SYSTEM},
         {"role": "user", "content": [
             {"type": "text", "text": prompt},
-            {"type": "image_url", "image_url": {"url": img_url}},
+            {"type": "image_url", "image_url": {"url": img_uri}},
         ]},
     ])
 
@@ -176,12 +297,46 @@ def observe(img_url: str, strict: bool = False) -> dict:
 #   예) defect_count==0일 때만 재검토(더 빠름)
 #   예) defect_count<=2일 때 재검토(더 보수적)
 def decide(obs: dict):
-    defect_count = sum(1 for v in obs.values() if v)
-    label = LABEL_ABNORMAL if defect_count >= 1 else LABEL_NORMAL
+    """
+    분류 판단 기준에 따른 우선순위 기반 의사결정
 
-    # 베이스라인용 "간단 재검토" 조건
-    uncertain = (defect_count == 0) or (defect_count == 1)
-    return label, uncertain
+    핵심 원칙: 흠집/파손이 있어도 기능(연결)에 문제없으면 정상으로 간주
+
+    우선순위 (비정상 판정):
+    1. lead_connectivity_fail (가장 중요) - 다리 절단/미삽/합선
+    2. component_missing - 부품 전체 유실
+    3. body_broken_severe - 내부 칩 노출 수준의 심각한 파손
+    4. posture_bad - 누움/뒤집힘
+    5. rotation_severe - 45도 이상 회전
+
+    정상 판정:
+    - 위 5가지 모두 False이면 정상
+    """
+
+    # 1. 연결형 결함 (가장 중요) - 다리 절단/미삽/합선
+    if obs.get('lead_connectivity_fail', False):
+        return LABEL_ABNORMAL, False  # 확정 비정상, 재검토 불필요
+
+    # 2. 유령형 - 부품 전체 유실
+    if obs.get('component_missing', False):
+        return LABEL_ABNORMAL, False
+
+    # 3. 파손형 - 내부 칩 노출 수준의 심각한 파손만
+    if obs.get('body_broken_severe', False):
+        return LABEL_ABNORMAL, False
+
+    # 4. 곡예형 - 누움/뒤집힘
+    if obs.get('posture_bad', False):
+        return LABEL_ABNORMAL, False
+
+    # 5. 회전형 - 45도 이상 회전
+    if obs.get('rotation_severe', False):
+        return LABEL_ABNORMAL, False
+
+    # 6. 정상 판정
+    # 모든 결함 항목이 False면 정상
+    # surface_defect_only 상태와 관계없이 재검토 없이 확정
+    return LABEL_NORMAL, False  # 확정 정상, 재검토 불필요
 
 # =========================
 # classify_agent(img_url)
@@ -238,6 +393,9 @@ def classify_agent(img_url: str, max_retries=3) -> int:
 # - time.sleep(0.2)를 조정하면 호출 속도를 바꿀 수 있습니다.
 # - fallback label(기본값)을 바꿀 수도 있습니다(기본은 정상=0).
 def main():
+    # output 디렉토리가 없으면 생성
+    os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
+
     test_df = pd.read_csv(TEST_CSV_PATH)
 
     # test.csv에 필수 컬럼이 있는지 확인
@@ -247,16 +405,21 @@ def main():
     preds = []
     n = len(test_df)
 
+    print(f"\n[START] Starting automated classification for {n} images...")
+    print(f"Input: {TEST_CSV_PATH}")
+    print(f"Output: {OUT_PATH}\n")
+
     for i, row in test_df.iterrows():
         _id = row["id"]
         img_url = row["img_url"]
 
         try:
             label = classify_agent(img_url)
-            print(f"[{i+1}/{n}] id={_id} -> {label}")
+            label_str = "Normal(0)" if label == LABEL_NORMAL else "Abnormal(1)"
+            print(f"[{i+1}/{n}] {_id} -> {label_str}")
         except Exception as e:
             # 오류 발생 시 정상(0) 판단으로 예외 처리
-            print(f"[{i+1}/{n}] id={_id} ERROR -> fallback 0 | {e}")
+            print(f"[{i+1}/{n}] {_id} ERROR -> fallback Normal(0) | {e}")
             label = LABEL_NORMAL
 
         # 제출 형식: 무조건 id, label 컬럼
@@ -269,8 +432,18 @@ def main():
     out_df = pd.DataFrame(preds, columns=["id", "label"])
     out_df.to_csv(OUT_PATH, index=False)
 
-    print(f"\n✅ Saved: {OUT_PATH}")
-    print(out_df.head())
+    # 통계 출력
+    normal_count = (out_df['label'] == LABEL_NORMAL).sum()
+    abnormal_count = (out_df['label'] == LABEL_ABNORMAL).sum()
+
+    print(f"\n[COMPLETE] Classification Complete!")
+    print(f"[STATS] Results:")
+    print(f"   - Total: {n} images")
+    print(f"   - Normal (0): {normal_count} images")
+    print(f"   - Abnormal (1): {abnormal_count} images")
+    print(f"\n[SAVE] Saved to: {OUT_PATH}")
+    print(f"\nFirst 10 results:")
+    print(out_df.head(10).to_string(index=False))
 
 # 스크립트 실행 시 main() 수행
 if __name__ == "__main__":
