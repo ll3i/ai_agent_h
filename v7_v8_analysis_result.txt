@@ -1,0 +1,51 @@
+============================================================
+V7 / V8 출력 결과 분석 (Ground Truth 기준)
+============================================================
+
+### V8 (outpu1t_v8.csv)
+혼동행렬 (Actual \ Predicted → Normal(0) / Abnormal(1)):
+              예측 Normal(0)  예측 Abnormal(1)
+ 실제 Normal(0)      TN= 26            FP= 40
+ 실제 Abnormal(1)    FN= 16            TP= 18
+ Accuracy: 0.4400  F1: 0.3913  Precision: 0.3103  Recall: 0.5294
+
+Classification Report:
+              precision    recall  f1-score   support
+
+   Normal(0)       0.62      0.39      0.48        66
+ Abnormal(1)       0.31      0.53      0.39        34
+
+    accuracy                           0.44       100
+   macro avg       0.46      0.46      0.44       100
+weighted avg       0.51      0.44      0.45       100
+
+
+### V7 (outpu1t_v7.csv)
+혼동행렬 (Actual \ Predicted → Normal(0) / Abnormal(1)):
+              예측 Normal(0)  예측 Abnormal(1)
+ 실제 Normal(0)      TN= 13            FP= 53
+ 실제 Abnormal(1)    FN=  7            TP= 27
+ Accuracy: 0.4000  F1: 0.4737  Precision: 0.3375  Recall: 0.7941
+
+Classification Report:
+              precision    recall  f1-score   support
+
+   Normal(0)       0.65      0.20      0.30        66
+ Abnormal(1)       0.34      0.79      0.47        34
+
+    accuracy                           0.40       100
+   macro avg       0.49      0.50      0.39       100
+weighted avg       0.54      0.40      0.36       100
+
+
+============================================================
+요약 비교
+============================================================
+지표                     V8         V7
+------------------------------------
+Accuracy           0.4400     0.4000
+F1-Score           0.3913     0.4737
+TN                     26         13
+FP (False Alarm)         40         53
+FN (Missed Defect)         16          7
+TP                     18         27

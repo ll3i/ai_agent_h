@@ -1,0 +1,116 @@
+# Environment (API keys - never commit)
+.env
+.env.local
+.env.*.local
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.vs/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Logs
+logs/
+*.log
+
+# Test data
+test/
+train/
+예제_이미지/
+정상반도체(test, 0)/
+정상반도체(test, 0)-20260127T045030Z-3-001/
+불량반도체(test, 1)/
+불량반도체(test, 1)-20260127T045017Z-3-001/
+temp_11_images/
+roi_preview/
+
+# Analysis and temporary files
+*.csv
+outpu1t*.csv
+output.csv.bak
+analysis*.txt
+*_analysis.txt
+debug*.txt
+debug*.py
+run_*.py
+analyze_*.py
+test_*.py
+validate_*.py
+quick_*.py
+experiment_*.py
+*_test*.py
+
+# Output files (except the main output)
+outputs/
+output*.csv
+!output/output.csv
+
+# Data files
+data/
+*.zip
+*.pdf
+*.md.ini
+
+# Notebooks
+notebooks/
+*.ipynb
+
+# Temporary files
+*.tmp
+*.bak
+*.pyc
+Rectangle*.png
+
+# Claude-specific
+.claude/
+
+# Documentation (generated)
+COMPARISON_GUIDE.md
+DEVELOPMENT_PLAN.md
+FINAL_IMPLEMENTATION_GUIDE.md
+FINAL_SUMMARY.md
+IMPLEMENTATION_PLAN.md
+IMPROVEMENTS_SUMMARY.md
+LUXIA_NATIVE_MODELS.md
+MULTI_MODEL_STRATEGY.md
+README_MULTI_MODEL.md
+QUICKSTART.md
+evaluation_report*.md
+최종*.md
+무제*.pdf
+
+# Keep only essential files
+# - All .py files in src/
+# - Main .py files (baseline.py, final_classify.py, etc.)
+# - requirements.txt
+# - .env.example
+# - output/output.csv
